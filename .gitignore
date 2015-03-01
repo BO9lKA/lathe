@@ -1,0 +1,31 @@
+int dir = 10;
+int stp = 11;
+int knf = 12;
+int knb = 13;
+int pot = A0;
+const int k = 1;
+
+void setup() {
+  pinMode (dir, OUTPUT);
+  pinMode (stp, OUTPUT);
+  pinMode (knf, INPUT);
+  pinMode (knb, INPUT);
+  pinMode (pot, INPUT);
+}
+
+void loop() {
+  while (knf == HIGH && knb == LOW) {
+    digitalWrite (dir, HIGH);
+    digitalWrite (stp, HIGH);
+    delay (analogRead(pot) * k);
+    digitalWrite (stp, LOW);
+  }
+  while (knb == HIGH && knf == LOW) {
+    digitalWrite (dir, LOW);
+    digitalWrite (stp, HIGH);
+    delay (analogRead(pot) * k);
+    digitalWrite (stp, LOW);
+  }
+  digitalWrite (dir, LOW);
+  digitalWrite (stp, LOW);
+}
